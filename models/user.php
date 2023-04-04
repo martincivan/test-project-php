@@ -29,23 +29,23 @@ class User extends BaseModel{
         return $this->denormalizePhone($value);
     }
 
-    public function denormalizePhone($value): mixed
+    public function denormalizePhone($value)
     {
         //HACK - limitation of framework escaping - numeric values are not escaped
-        if (str_starts_with($value ?? "", "_")) {
+        if (is_string($value) && !empty($value) && $value[0] === "_") {
             $value = substr($value, 1);
         }
         return $value;
     }
 
 
-    public function normalizePhone($phone): string
+    public function normalizePhone($phone)
     {
         //HACK - limitation of framework escaping - numeric values are not escaped
         return "_" . $phone;
     }
 
-    protected function setFields($data): void
+    protected function setFields($data)
     {
         $this->validateName($data['name'] ?? null);
         $this->validateEmail($data['email'] ?? null);
@@ -55,7 +55,7 @@ class User extends BaseModel{
         parent::setFields($data);
     }
 
-    private function validateName($name): void
+    private function validateName($name)
     {
         if (empty($name)) {
             throw new InvalidArgumentException('Name cannot be empty');
@@ -65,14 +65,14 @@ class User extends BaseModel{
         }
     }
 
-    private function validateEmail($email): void
+    private function validateEmail($email)
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new InvalidArgumentException('Email is not valid');
         }
     }
 
-    private function validateCity($city): void
+    private function validateCity($city)
     {
         if (empty($city)) {
             throw new InvalidArgumentException('City cannot be empty');
