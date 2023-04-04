@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  mariadb:
+    container_name: mariadb
+    image: library/mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=nbusr123
+      - MYSQL_HOST=*
+      - MYSQL_DATABASE=test-project
+    volumes:
+      - mariadb_cache:/var/cache
+      - mariadb_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  php:
+    container_name: php
+    build:
+      context: ./
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "80:80"
+    depends_on:
+      - mariadb
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    depends_on:
+      - mariadb
+    environment:
+      - PMA_HOSTS=mariadb
+      - PMA_USER=root
+      - PMA_PASSWORD=nbusr123
+volumes:
+  mariadb_data:
+  mariadb_cache:
