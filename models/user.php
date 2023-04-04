@@ -29,20 +29,14 @@ class User extends BaseModel{
         return $this->denormalizePhone($value);
     }
 
-    public function denormalizePhone($value)
+    /**
+     * @throws InvalidArgumentException
+     *
+     * @return void
+     */
+    public function insert($data = array())
     {
-        //HACK - limitation of framework escaping - numeric values are not escaped
-        if (is_string($value) && !empty($value) && $value[0] === "_") {
-            $value = substr($value, 1);
-        }
-        return $value;
-    }
-
-
-    public function normalizePhone($phone)
-    {
-        //HACK - limitation of framework escaping - numeric values are not escaped
-        return "_" . $phone;
+        parent::insert($data);
     }
 
     protected function setFields($data)
@@ -53,6 +47,21 @@ class User extends BaseModel{
         $this->validatePhone($data['phone'] ?? null);
         $data['phone'] = $this->normalizePhone($data['phone']);
         parent::setFields($data);
+    }
+
+    private function denormalizePhone($value)
+    {
+        //HACK - limitation of framework - numeric values are not escaped properly
+        if (is_string($value) && !empty($value) && $value[0] === "_") {
+            $value = substr($value, 1);
+        }
+        return $value;
+    }
+
+    private function normalizePhone($phone)
+    {
+        //HACK - limitation of framework - numeric values are not escaped properly
+        return "_" . $phone;
     }
 
     private function validateName($name)
@@ -80,16 +89,6 @@ class User extends BaseModel{
         if (!is_string($city)) {
             throw new InvalidArgumentException('City is not a valid string');
         }
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     *
-     * @return void
-     */
-    public function insert($data = array())
-    {
-        parent::insert($data);
     }
 
     private function validatePhone($phone)
