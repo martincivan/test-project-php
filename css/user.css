@@ -1,0 +1,12 @@
+thead {
+    position: sticky;
+    top: 0;
+    background: #e0e0e0
+}
+
+.table-container {
+    max-height: 800px;
+    overflow: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
