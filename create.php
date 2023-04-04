@@ -14,7 +14,8 @@ try {
 } catch (InvalidArgumentException $e) {
     // Redirect back to index with error message
     header('Location: index.php?error=' . $e->getMessage());
-    echo htmlentities($e->getMessage());
+    http_response_code(400);
+    echo $e->getMessage();
     exit;
 }
 

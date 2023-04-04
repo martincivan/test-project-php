@@ -15,6 +15,40 @@
             }
         }
     }
+
+    function createUser(event) {
+        event.preventDefault();
+        let form = event.target;
+        let data = new FormData(form);
+        fetch(form.action, {
+            method: 'POST',
+            body: data
+        }).then(response => {
+            if(response.status === 200) {
+                    let table = document.getElementById('users-table-body');
+                    let row = document.createElement('tr');
+                    let name = document.createElement('td');
+                    name.className = "name-value"
+                    name.innerText = data.get("name");
+                    let email = document.createElement('td');
+                    email.innerText = data.get("email");
+                    email.className = "email-value"
+                    let city = document.createElement('td');
+                    city.innerText = data.get("city");
+                    city.className = "city-value"
+                    row.appendChild(name);
+                    row.appendChild(email);
+                    row.appendChild(city);
+                    table.appendChild(row);
+                    form.reset();
+            } else if (response.status === 400) {
+                response.text().then(text => {
+                    alert(text);
+                });
+            }
+        });
+
+    }
 </script>
 
 <input type="search" placeholder="Search City" onkeyup="filterByCity(event)">
@@ -37,7 +71,7 @@
 	</tbody>
 </table>				
 
-<form method="post" action="create.php">
+<form method="post" action="create.php" onsubmit="createUser(event)">
     <div class="form-group row">
         <label for="name">Name:</label>
         <input name="name" type="text" id="name" required class="form-control"/>
