@@ -1,1 +1,1 @@
-ALTER TABLE `users` ADD `phone` VARCHAR(50) NULL AFTER `created_at`;
+ALTER TABLE `users` ADD `phone` TEXT NULL AFTER `created_at`;

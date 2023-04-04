@@ -67,14 +67,14 @@
 		</tr>
 	</thead>
 	<tbody id="users-table-body">
-		<?foreach($users as $user){?>
+		<?php foreach($users as $user){?>
 		<tr>
 			<td class="name-value"><?=$user->getName()?></td>
 			<td class="email-value"><?=$user->getEmail()?></td>
 			<td class="city-value"><?=$user->getCity()?></td>
 			<td class="phone-value"><?=$user->getPhone()?></td>
 		</tr>
-		<?}?>
+		<?php }?>
 	</tbody>
 </table>				
 
@@ -93,7 +93,7 @@
     </div>
     <div class="form-group row">
         <label for="phone">Phone:</label>
-        <input name="phone" type="tel" id="phone" maxlength="50" required class="form-control"/>
+        <input name="phone" type="tel" id="phone" required class="form-control"/>
     </div>
     <div class="form-group row">
         <button class="btn btn-default">Create new row</button>
