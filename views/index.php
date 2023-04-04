@@ -36,9 +36,13 @@
                 let city = document.createElement('td');
                 city.innerText = data.get("city");
                 city.className = "city-value"
+                let phone = document.createElement('td');
+                phone.innerText = data.get("phone");
+                phone.className = "phone-value"
                 row.appendChild(name);
                 row.appendChild(email);
                 row.appendChild(city);
+                row.appendChild(phone);
                 table.appendChild(row);
                 form.reset();
             } else if (response.status === 400) {
@@ -59,6 +63,7 @@
 			<th>Name</th>
 			<th>E-mail</th>
 			<th>City</th>
+			<th>Phone</th>
 		</tr>
 	</thead>
 	<tbody id="users-table-body">
@@ -67,6 +72,7 @@
 			<td class="name-value"><?=$user->getName()?></td>
 			<td class="email-value"><?=$user->getEmail()?></td>
 			<td class="city-value"><?=$user->getCity()?></td>
+			<td class="phone-value"><?=$user->getPhone()?></td>
 		</tr>
 		<?}?>
 	</tbody>
@@ -84,6 +90,10 @@
     <div class="form-group row">
         <label for="city">City:</label>
         <input name="city" type="text" id="city" required class="form-control"/>
+    </div>
+    <div class="form-group row">
+        <label for="phone">Phone:</label>
+        <input name="phone" type="tel" id="phone" maxlength="50" required class="form-control"/>
     </div>
     <div class="form-group row">
         <button class="btn btn-default">Create new row</button>

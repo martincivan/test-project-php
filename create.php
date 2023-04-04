@@ -9,7 +9,8 @@ try {
     $user->insert(array(
         'name' => $_POST['name'],
         'email' => $_POST['email'],
-        'city' => $_POST['city']
+        'city' => $_POST['city'],
+        'phone' => $_POST['phone']
     ));
 } catch (InvalidArgumentException $e) {
     // Redirect back to index with error message
