@@ -50,8 +50,9 @@
 
     }
 </script>
-
-<input type="search" placeholder="Search City" onkeyup="filterByCity(event)">
+<div class="form-outline">
+    <input class="form-control" type="search" placeholder="Search City" onkeyup="filterByCity(event)" aria-label="Search">
+</div>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -78,7 +79,7 @@
     </div>
     <div class="form-group row">
         <label for="email">E-mail:</label>
-        <input name="email"type="email" id="email" required class="form-control"/>
+        <input name="email" type="email" id="email" required class="form-control"/>
     </div>
     <div class="form-group row">
         <label for="city">City:</label>
